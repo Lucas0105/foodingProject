@@ -1,0 +1,14 @@
+### test post insert
+GET http://localhost:8000/hello
+
+### test post insert
+POST http://localhost:8000/insert
+Content-Type: application/json
+
+{"user":"dnjswo","passwd":"1234"}
+
+### test get find
+GET http://localhost:8000/find
+Content-Type: application/json
+
+{"user":"dnjswo","passwd":"1234"}
