@@ -31,14 +31,23 @@ export default (db_client) => {
         }
     });
 
-    router.get('/find', async(req, res) =>{
+    router.post('/find', async(req, res) =>{
         try{
-            console.log(req.body);
             const database = db_client.db('foodingDb');
             const user = database.collection('user');
-            let cursor = await user.find({user:req.body.user, passwd:req.body.passwd})
+
+            console.log(req.body);
+
+            let cursor = await user.find({user:req.body.userId, passwd:req.body.passwd})
             
             let items = await cursor.toArray();
+
+            if (items[0] === undefined){
+                res.json({login:'false'});
+            } 
+            else {
+                res.json({login:'true', userName:items[0].userName, r:'ok'});
+            }
 
             res.json({r:'ok', d:items});
         }
